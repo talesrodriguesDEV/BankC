@@ -201,8 +201,7 @@ int main(void) {
 								system("cls");
 								printf("Dados salvos com sucesso.\n");
 								system("pause");
-								goto MenuClientes;																						
-								//conferência de repetição e salvamento opcional :)
+								goto MenuClientes;																														
 							break;		
 							
 							//LISTAR CLIENTES CADASTRADOS
@@ -232,8 +231,7 @@ int main(void) {
 								system("pause"); 
 								system("cls");
 								goto MenuClientes;								
-								}
-								//ordem alfabética							
+								}															
 							break;
 		
 							//BUSCAR CLIENTE
@@ -550,7 +548,9 @@ int main(void) {
 			printf("D - Realizar um depósito em uma conta.\n");
 			printf("T - Realizar transferência entre contas.\n");
 			printf("E - Exibir extrato de uma conta.\n");
-			printf("S - Sair\n");			
+			printf("S - Sair\n");	
+			printf("%d\n", NumTransacoes[1]);
+			printf("%d\n", NumTransacoes[2]);		
 															
 						char comando3;
 						fflush(stdin);
@@ -573,20 +573,20 @@ int main(void) {
 										NumContas[m]++;			
 										switch(NumContas[m]){			
 											case 1:
-												printf("Digite o número da agência: ");				
+												printf("Digite a agência: ");				
 												fflush(stdin);
 												scanf("%d", &clientes[m].contas[m].agencia);			
-												printf("Digite o númeoro da conta: ");
+												printf("Digite o número da conta: ");
 												fflush(stdin);
 												scanf("%d", &clientes[m].contas[m].NumConta);			
 												clientes[m].contas[m].saldo = 0;			
 											break;
 				
 											case 2:
-												printf("Digite o número da agência: ");
+												printf("Digite a agência: ");
 												fflush(stdin);
 												scanf("%d", &clientes[m].contas[m + 100].agencia);			
-												printf("Digite o númeoro da conta: ");
+												printf("Digite o número da conta: ");
 												fflush(stdin);
 												scanf("%d", &clientes[m].contas[m + 100].NumConta);			
 												clientes[m].contas[m + 100].saldo = 0;					
@@ -603,8 +603,7 @@ int main(void) {
 								printf("Cliente não encontrado.\n");
 								system("pause");
 								system("cls");
-								goto MenuContas;																				
-							//conferência de repetição																										
+								goto MenuContas;																																								
 							break;
 							
 							//LISTAR CONTAS CADASTRADAS
@@ -644,8 +643,7 @@ int main(void) {
 									system("pause");
 									system("cls");
 									goto MenuContas;
-								}
-							//ordem alfabética e decrescente de saldo	
+								}								
 							break;
 														
 							//LISTAR CONTAS DE UM CLIENTE
@@ -701,8 +699,7 @@ int main(void) {
 								printf("Clientes não encontrado.\n");
 								system("pause");
 								system("cls");
-								goto MenuContas;
-							//ordem decrescente de saldo		
+								goto MenuContas;									
 							break;
 						
 							//REALIZAR SAQUE
@@ -740,11 +737,11 @@ int main(void) {
 													NumTransacoes[p]++;
 													printf("Forneça uma descrição para este saque: ");
 													fflush(stdin);
-													scanf("%[^\n]s", clientes[NumTransacoes[p]].transacoes[NumTransacoes[p]].descricao);
+													scanf("%[^\n]s", clientes[p].transacoes[NumTransacoes[p]].descricao);
 													clientes[p].contas[p].saldo = clientes[p].contas[p].saldo - 50;
-													clientes[NumTransacoes[p]].transacoes[NumTransacoes[p]].tipo = 'D';
-													strftime(clientes[NumTransacoes[p]].transacoes[NumTransacoes[p]].data, 10, "%d/%m/%y", timeinfo);
-													clientes[NumTransacoes[p]].transacoes[NumTransacoes[p]].valor = 50;																																							
+													clientes[p].transacoes[NumTransacoes[p]].tipo = 'D';
+													strftime(clientes[p].transacoes[NumTransacoes[p]].data, 10, "%d/%m/%y", timeinfo);
+													clientes[p].transacoes[NumTransacoes[p]].valor = 50;																																							
 													PrintNotas50();
 													system("pause");
 													system("cls");
@@ -764,11 +761,11 @@ int main(void) {
 													NumTransacoes[p]++;
 													printf("Forneça uma descrição para este saque: ");
 													fflush(stdin);
-													scanf("%[^\n]s", clientes[NumTransacoes[p]].transacoes[NumTransacoes[p]].descricao);
+													scanf("%[^\n]s", clientes[p].transacoes[NumTransacoes[p]].descricao);
 													clientes[p].contas[p].saldo = clientes[p].contas[p].saldo - 100;
-													clientes[NumTransacoes[p]].transacoes[NumTransacoes[p]].tipo = 'D';
-													strftime(clientes[NumTransacoes[p]].transacoes[NumTransacoes[p]].data, 10, "%d/%m/%y", timeinfo);
-													clientes[NumTransacoes[p]].transacoes[NumTransacoes[p]].valor = 100;										
+													clientes[p].transacoes[NumTransacoes[p]].tipo = 'D';
+													strftime(clientes[p].transacoes[NumTransacoes[p]].data, 10, "%d/%m/%y", timeinfo);
+													clientes[p].transacoes[NumTransacoes[p]].valor = 100;										
 													PrintNotas100();
 													system("pause");
 													system("cls");
@@ -788,11 +785,11 @@ int main(void) {
 													NumTransacoes[p]++;
 													printf("Forneça uma descrição para este saque: ");
 													fflush(stdin);
-													scanf("%[^\n]s", clientes[NumTransacoes[p]].transacoes[NumTransacoes[p]].descricao);
+													scanf("%[^\n]s", clientes[p].transacoes[NumTransacoes[p]].descricao);
 													clientes[p].contas[p].saldo = clientes[p].contas[p].saldo - 200;
-													clientes[NumTransacoes[p]].transacoes[NumTransacoes[p]].tipo = 'D';
-													strftime(clientes[NumTransacoes[p]].transacoes[NumTransacoes[p]].data, 10, "%d/%m/%y", timeinfo);
-													clientes[NumTransacoes[p]].transacoes[NumTransacoes[p]].valor = 200;													
+													clientes[p].transacoes[NumTransacoes[p]].tipo = 'D';
+													strftime(clientes[p].transacoes[NumTransacoes[p]].data, 10, "%d/%m/%y", timeinfo);
+													clientes[p].transacoes[NumTransacoes[p]].valor = 200;													
 													PrintNotas200();
 													system("pause");
 													system("cls");
@@ -812,11 +809,11 @@ int main(void) {
 													NumTransacoes[p]++;
 													printf("Forneça uma descrição para este saque: ");
 													fflush(stdin);
-													scanf("%[^\n]s", clientes[NumTransacoes[p]].transacoes[NumTransacoes[p]].descricao);
+													scanf("%[^\n]s", clientes[p].transacoes[NumTransacoes[p]].descricao);
 													clientes[p].contas[p].saldo = clientes[p].contas[p].saldo - 500;
-													clientes[NumTransacoes[p]].transacoes[NumTransacoes[p]].tipo = 'D';
-													strftime(clientes[NumTransacoes[p]].transacoes[NumTransacoes[p]].data, 10, "%d/%m/%y", timeinfo);
-													clientes[NumTransacoes[p]].transacoes[NumTransacoes[p]].valor = 500;													
+													clientes[p].transacoes[NumTransacoes[p]].tipo = 'D';
+													strftime(clientes[p].transacoes[NumTransacoes[p]].data, 10, "%d/%m/%y", timeinfo);
+													clientes[p].transacoes[NumTransacoes[p]].valor = 500;													
 													PrintNotas500();
 													system("pause");
 													system("cls");
@@ -860,11 +857,11 @@ int main(void) {
 														NumTransacoes[100 + p]++;
 														printf("Forneça uma descrição para este saque: ");
 														fflush(stdin);
-														scanf("%[^\n]s", clientes[NumTransacoes[100 + p]].transacoes[NumTransacoes[100 + p]].descricao);
+														scanf("%[^\n]s", clientes[100 + p].transacoes[NumTransacoes[100 + p]].descricao);
 														clientes[p].contas[100 + p].saldo = clientes[p].contas[100 + p].saldo - 50;
-														clientes[NumTransacoes[100 + p]].transacoes[NumTransacoes[100 + p]].tipo = 'D';
-														strftime(clientes[NumTransacoes[100 + p]].transacoes[NumTransacoes[100 + p]].data, 10, "%d/%m/%y", timeinfo);
-														clientes[NumTransacoes[100 + p]].transacoes[NumTransacoes[100 + p]].valor = 50;
+														clientes[100 + p].transacoes[NumTransacoes[100 + p]].tipo = 'D';
+														strftime(clientes[100 + p].transacoes[NumTransacoes[100 + p]].data, 10, "%d/%m/%y", timeinfo);
+														clientes[100 + p].transacoes[NumTransacoes[100 + p]].valor = 50;
 														PrintNotas50();
 														system("pause");
 														system("cls");
@@ -884,11 +881,11 @@ int main(void) {
 														NumTransacoes[100 + p]++;
 														printf("Forneça uma descrição para este saque: ");
 														fflush(stdin);
-														scanf("%[^\n]s", clientes[NumTransacoes[100 + p]].transacoes[NumTransacoes[100 + p]].descricao);
+														scanf("%[^\n]s", clientes[100 + p].transacoes[NumTransacoes[100 + p]].descricao);
 														clientes[p].contas[100 + p].saldo = clientes[p].contas[100 + p].saldo - 100;
-														clientes[NumTransacoes[100 + p]].transacoes[NumTransacoes[100 + p]].tipo = 'D';
-														strftime(clientes[NumTransacoes[100 + p]].transacoes[NumTransacoes[100 + p]].data, 10, "%d/%m/%y", timeinfo);
-														clientes[NumTransacoes[100 + p]].transacoes[NumTransacoes[100 + p]].valor = 100;
+														clientes[100 + p].transacoes[NumTransacoes[100 + p]].tipo = 'D';
+														strftime(clientes[100 + p].transacoes[NumTransacoes[100 + p]].data, 10, "%d/%m/%y", timeinfo);
+														clientes[100 + p].transacoes[NumTransacoes[100 + p]].valor = 100;
 														PrintNotas100();
 														system("pause");
 														system("cls");
@@ -908,11 +905,11 @@ int main(void) {
 														NumTransacoes[100 + p]++;
 														printf("Forneça uma descrição para este saque: ");
 														fflush(stdin);
-														scanf("%[^\n]s", clientes[NumTransacoes[100 + p]].transacoes[NumTransacoes[100 + p]].descricao);
+														scanf("%[^\n]s", clientes[100 + p].transacoes[NumTransacoes[100 + p]].descricao);
 														clientes[p].contas[100 + p].saldo = clientes[p].contas[100 + p].saldo - 200;
-														clientes[NumTransacoes[100 + p]].transacoes[NumTransacoes[100 + p]].tipo = 'D';
-														strftime(clientes[NumTransacoes[100 + p]].transacoes[NumTransacoes[100 + p]].data, 10, "%d/%m/%y", timeinfo);
-														clientes[NumTransacoes[100 + p]].transacoes[NumTransacoes[100 + p]].valor = 200;
+														clientes[100 + p].transacoes[NumTransacoes[100 + p]].tipo = 'D';
+														strftime(clientes[100 + p].transacoes[NumTransacoes[100 + p]].data, 10, "%d/%m/%y", timeinfo);
+														clientes[100 + p].transacoes[NumTransacoes[100 + p]].valor = 200;
 														PrintNotas200();
 														system("pause");
 														system("cls");
@@ -932,11 +929,11 @@ int main(void) {
 														NumTransacoes[100 + p]++;
 														printf("Forneça uma descrição para este saque: ");
 														fflush(stdin);
-														scanf("%[^\n]s", clientes[NumTransacoes[100 + p]].transacoes[NumTransacoes[100 + p]].descricao);
+														scanf("%[^\n]s", clientes[100 + p].transacoes[NumTransacoes[100 + p]].descricao);
 														clientes[p].contas[100 + p].saldo = clientes[p].contas[100 + p].saldo - 500;
-														clientes[NumTransacoes[100 + p]].transacoes[NumTransacoes[100 + p]].tipo = 'D';
-														strftime(clientes[NumTransacoes[100 + p]].transacoes[NumTransacoes[100 + p]].data, 10, "%d/%m/%y", timeinfo);
-														clientes[NumTransacoes[100 + p]].transacoes[NumTransacoes[100 + p]].valor = 500;
+														clientes[100 + p].transacoes[NumTransacoes[100 + p]].tipo = 'D';
+														strftime(clientes[100 + p].transacoes[NumTransacoes[100 + p]].data, 10, "%d/%m/%y", timeinfo);
+														clientes[100 + p].transacoes[NumTransacoes[100 + p]].valor = 500;
 														PrintNotas500();
 														system("pause");
 														system("cls");
@@ -994,11 +991,11 @@ int main(void) {
 										scanf("%f", &ValorDeposito);
 										printf("Forneça uma descrição para este depósito: ");
 										fflush(stdin);
-										scanf("%[^\n]s", clientes[NumTransacoes[q]].transacoes[NumTransacoes[q]].descricao);	
+										scanf("%[^\n]s", clientes[q].transacoes[NumTransacoes[q]].descricao);	
 										clientes[q].contas[q].saldo = clientes[q].contas[q].saldo + ValorDeposito;
-										clientes[NumTransacoes[q]].transacoes[NumTransacoes[q]].tipo = 'C';
-										clientes[NumTransacoes[q]].transacoes[NumTransacoes[q]].valor = ValorDeposito;										
-										strftime(clientes[NumTransacoes[q]].transacoes[NumTransacoes[q]].data, 10, "%d/%m/%y", timeinfo);
+										clientes[q].transacoes[NumTransacoes[q]].tipo = 'C';
+										clientes[q].transacoes[NumTransacoes[q]].valor = ValorDeposito;										
+										strftime(clientes[q].transacoes[NumTransacoes[q]].data, 10, "%d/%m/%y", timeinfo);
 										system("cls");
 										printf("Depósito efetuado com sucesso.\n");
 										system("pause");
@@ -1018,11 +1015,11 @@ int main(void) {
 											scanf("%f", &ValorDeposito);
 											printf("Forneça uma descrição para este depósito: ");
 											fflush(stdin);
-											scanf("%[^\n]s", clientes[NumTransacoes[100 + q]].transacoes[NumTransacoes[100 + q]].descricao);	
+											scanf("%[^\n]s", clientes[100 + q].transacoes[NumTransacoes[100 + q]].descricao);	
 											clientes[q].contas[100 + q].saldo = clientes[q].contas[100 + q].saldo + ValorDeposito;
-											clientes[NumTransacoes[100 + q]].transacoes[NumTransacoes[100 + q]].tipo = 'C';
-											clientes[NumTransacoes[100 + q]].transacoes[NumTransacoes[100 + q]].valor = ValorDeposito;										
-											strftime(clientes[NumTransacoes[100 + q]].transacoes[NumTransacoes[100 + q]].data, 10, "%d/%m/%y", timeinfo);
+											clientes[100 + q].transacoes[NumTransacoes[100 + q]].tipo = 'C';
+											clientes[100 + q].transacoes[NumTransacoes[100 + q]].valor = ValorDeposito;										
+											strftime(clientes[100 + q].transacoes[NumTransacoes[100 + q]].data, 10, "%d/%m/%y", timeinfo);
 											system("cls");
 											printf("Depósito efetuado com sucesso.\n");
 											system("pause");
@@ -1047,8 +1044,7 @@ int main(void) {
 								int NumContaOrigem, NumContaDestino;
 								int r = 1;
 								int s = 1;	
-								char *pch;	
-								char *pch2;																					
+								char *pch;																														
 								printf("Digite a agência da conta de origem: ");
 								fflush(stdin);
 								scanf("%d", &NumAgenciaOrigem);
@@ -1098,45 +1094,48 @@ int main(void) {
 										fflush(stdin);
 										scanf("%f", &ValorTransferencia);
 										if(ValorTransferencia <= clientes[r].contas[r].saldo
-										|| ValorTransferencia <= clientes[r].contas[100 + r].saldo){
+										|| ValorTransferencia <= clientes[r].contas[100 + r].saldo){											
+											ContTransacoes++;																						
+											NumTransacoes[s]++;		
+											clientes[s].contas[s].saldo = clientes[s].contas[s].saldo + ValorTransferencia;																																	
+											clientes[s].transacoes[NumTransacoes[s]].tipo = 'C';																						
+											clientes[s].transacoes[NumTransacoes[s]].valor = ValorTransferencia;											
+											strftime(clientes[s].transacoes[NumTransacoes[s]].data, 10, "%d/%m/%y", timeinfo);
+											strcpy(clientes[s].transacoes[NumTransacoes[s]].descricao, "Transferência de ");											
 											if(NumAgenciaOrigem == clientes[r].contas[r].agencia
 											&& NumContaOrigem == clientes[r].contas[r].NumConta){
-												clientes[r].contas[r].saldo = clientes[r].contas[r].saldo - ValorTransferencia;
-												NumTransacoes[r]++;																																		
-												clientes[NumTransacoes[r]].transacoes[NumTransacoes[r]].tipo = 'D';												
-												strcpy(clientes[NumTransacoes[r]].transacoes[NumTransacoes[r]].descricao, "Transferência para conta: {age}-{acc}"); 												
-												pch = strstr(clientes[NumTransacoes[r]].transacoes[NumTransacoes[r]].descricao, "age");
-												memset(pch, NumAgenciaDestino, 3);
-												pch2 = strstr(clientes[NumTransacoes[r]].transacoes[NumTransacoes[r]].descricao, "acc");
-												memset(pch2, NumContaDestino, 3);
-												clientes[NumTransacoes[r]].transacoes[NumTransacoes[r]].valor = ValorTransferencia;																						
-												strftime(clientes[NumTransacoes[r]].transacoes[NumTransacoes[r]].data, 10, "%d/%m/%y", timeinfo);
+												NumTransacoes[r]++;
+												clientes[r].contas[r].saldo = clientes[r].contas[r].saldo - ValorTransferencia;																																														
+												clientes[r].transacoes[NumTransacoes[r]].tipo = 'D';												
+												clientes[r].transacoes[NumTransacoes[r]].valor = ValorTransferencia;																						
+												strftime(clientes[r].transacoes[NumTransacoes[r]].data, 10, "%d/%m/%y", timeinfo);
+												strcpy(clientes[r].transacoes[NumTransacoes[r]].descricao, "Transferência para "); 												
+												strcat(clientes[r].transacoes[NumTransacoes[r]].descricao, clientes[s].nome);												 												
+												strcat(clientes[s].transacoes[NumTransacoes[s]].descricao, clientes[r].nome);																								
 											}else{
 												if(NumAgenciaOrigem == clientes[r].contas[100 + r].agencia
 												&& NumContaOrigem == clientes[r].contas[100 + r].NumConta){
-													clientes[r].contas[100 + r].saldo = clientes[r].contas[100 + r].saldo - ValorTransferencia;
-													NumTransacoes[100 + r]++;																																		
-													clientes[NumTransacoes[100 + r]].transacoes[NumTransacoes[100 + r]].tipo = 'D';
-													clientes[NumTransacoes[100 + r]].transacoes[NumTransacoes[100 + r]].valor = ValorTransferencia;
-													clientes[NumTransacoes[100 + r]].transacoes[NumTransacoes[100 + r]].descricao[100] = printf("Transferência para conta: {%d}-{%d}", NumAgenciaDestino, NumContaDestino);
-													clientes[NumTransacoes[100 + r]].transacoes[NumTransacoes[100 + r]].valor = ValorTransferencia;																						
-													strftime(clientes[NumTransacoes[100 + r]].transacoes[NumTransacoes[100 + r]].data, 10, "%d/%m/%y", timeinfo);		
+													NumTransacoes[100 + r]++;
+													clientes[r].contas[100 + r].saldo = clientes[r].contas[100 + r].saldo - ValorTransferencia;																																															
+													clientes[100 + r].transacoes[NumTransacoes[100 + r]].tipo = 'D';
+													clientes[100 + r].transacoes[NumTransacoes[100 + r]].valor = ValorTransferencia;																																		
+													strftime(clientes[100 + r].transacoes[NumTransacoes[100 + r]].data, 10, "%d/%m/%y", timeinfo);
+													strcpy(clientes[100 + r].transacoes[NumTransacoes[100 + r]].descricao, "Transferência para "); 												
+													strcat(clientes[100 + r].transacoes[NumTransacoes[100 + r]].descricao, clientes[s].nome);													 												
+													strcat(clientes[s].transacoes[NumTransacoes[s]].descricao, clientes[r].nome);															
 												}
 											}
-											ContTransacoes++;																						
-											NumTransacoes[s]++;
-											clientes[s].contas[s].saldo = clientes[s].contas[s].saldo + ValorTransferencia;																								
-											clientes[NumTransacoes[s]].transacoes[NumTransacoes[s]].tipo = 'C';
-											
-											clientes[NumTransacoes[s]].transacoes[NumTransacoes[s]].descricao[100] = printf("Transferência de conta: {%d}-{%d}", NumAgenciaOrigem, NumContaOrigem);
-											clientes[NumTransacoes[s]].transacoes[NumTransacoes[s]].valor = ValorTransferencia;											
-											strftime(clientes[NumTransacoes[s]].transacoes[NumTransacoes[s]].data, 10, "%d/%m/%y", timeinfo);
 											system("cls");
 											printf("Transferência efetuada com sucesso.\n");
 											system("pause");
 											system("cls");
 											goto MenuContas;											
-										}																													
+										}
+										system("cls");
+										printf("Saldo insuficiente.\n");
+										system("pause");
+										system("cls");
+										goto MenuContas;																													
 									}
 									else{
 										if(NumAgenciaDestino == clientes[s].contas[100 + s].agencia
@@ -1147,45 +1146,51 @@ int main(void) {
 											printf("Saldo: %.2f\n\n", clientes[s].contas[100 + s].saldo);
 											printf("Qual valor deseja transferir ?\n");
 											fflush(stdin);
-											scanf("%d", &ValorTransferencia);
+											scanf("%f", &ValorTransferencia);
 											if(ValorTransferencia <= clientes[r].contas[r].saldo
-											|| ValorTransferencia <= clientes[r].contas[100 + r].saldo){
-												if(NumAgenciaOrigem == clientes[r].contas[r].agencia
-												&& NumContaOrigem == clientes[r].contas[r].NumConta){
-													clientes[r].contas[r].saldo = clientes[r].contas[r].saldo - ValorTransferencia;
-													NumTransacoes[r]++;																																		
-													clientes[NumTransacoes[r]].transacoes[NumTransacoes[r]].tipo = 'D';
-													
-													clientes[NumTransacoes[r]].transacoes[NumTransacoes[r]].descricao[100] = printf("Transferência para conta: {%d}-{%d}", NumAgenciaDestino, NumContaDestino);
-													clientes[NumTransacoes[r]].transacoes[NumTransacoes[r]].valor = ValorTransferencia;																						
-													strftime(clientes[NumTransacoes[r]].transacoes[NumTransacoes[r]].data, 10, "%d/%m/%y", timeinfo);
-												}else{
-													if(NumAgenciaOrigem == clientes[r].contas[100 + r].agencia
-													&& NumContaOrigem == clientes[r].contas[100 + r].NumConta){
-														clientes[r].contas[100 + r].saldo = clientes[r].contas[100 + r].saldo - ValorTransferencia;	
-														NumTransacoes[100 + r]++;																																			
-														clientes[NumTransacoes[100 + r]].transacoes[NumTransacoes[100 + r]].tipo = 'D';
-														
-														clientes[NumTransacoes[100 + r]].transacoes[NumTransacoes[100 + r]].descricao[100] = printf("Transferência para conta: {%d}-{%d}", NumAgenciaDestino, NumContaDestino);
-														clientes[NumTransacoes[100 + r]].transacoes[NumTransacoes[100 + r]].valor = ValorTransferencia;																						
-														strftime(clientes[NumTransacoes[100 + r]].transacoes[NumTransacoes[100 + r]].data, 10, "%d/%m/%y", timeinfo);
-													}
-												}
+											|| ValorTransferencia <= clientes[r].contas[100 + r].saldo){												
 												ContTransacoes++;																								
 												NumTransacoes[100 + s]++;
-												clientes[s].contas[100 + s].saldo = clientes[s].contas[100 + s].saldo + ValorTransferencia;																								
-												clientes[NumTransacoes[100 + s]].transacoes[NumTransacoes[100 + s]].tipo = 'C';
-												
-												clientes[NumTransacoes[100 + s]].transacoes[NumTransacoes[100 + s]].descricao[100] = printf("Transferência de conta: {%d}-{%d}", NumAgenciaOrigem, NumContaOrigem);
-												clientes[NumTransacoes[100 + s]].transacoes[NumTransacoes[100 + s]].valor = ValorTransferencia;											
-												strftime(clientes[NumTransacoes[100 + s]].transacoes[NumTransacoes[100 + s]].data, 10, "%d/%m/%y", timeinfo);
+												clientes[s].contas[100 + s].saldo = clientes[s].contas[100 + s].saldo + ValorTransferencia;																																				
+												clientes[100 + s].transacoes[NumTransacoes[100 + s]].tipo = 'C';																								
+												clientes[100 + s].transacoes[NumTransacoes[100 + s]].valor = ValorTransferencia;											
+												strftime(clientes[100 + s].transacoes[100 + s].data, 10, "%d/%m/%y", timeinfo);
+												strcpy(clientes[100 + s].transacoes[NumTransacoes[100 + s]].descricao, "Transferência de ");
+												if(NumAgenciaOrigem == clientes[r].contas[r].agencia
+												&& NumContaOrigem == clientes[r].contas[r].NumConta){												
+													NumTransacoes[r]++;		
+													clientes[r].contas[r].saldo = clientes[r].contas[r].saldo - ValorTransferencia;																																
+													clientes[r].transacoes[NumTransacoes[r]].tipo = 'D';																										
+													clientes[r].transacoes[NumTransacoes[r]].valor = ValorTransferencia;																						
+													strftime(clientes[r].transacoes[NumTransacoes[r]].data, 10, "%d/%m/%y", timeinfo);
+													strcpy(clientes[r].transacoes[NumTransacoes[r]].descricao, "Transferência para ");
+													strcat(clientes[r].transacoes[NumTransacoes[r]].descricao, clientes[s].nome);
+													strcat(clientes[100 + s].transacoes[NumTransacoes[100 + s]].descricao, clientes[r].nome);
+												}else{
+													if(NumAgenciaOrigem == clientes[r].contas[100 + r].agencia
+													&& NumContaOrigem == clientes[r].contas[100 + r].NumConta){															
+														NumTransacoes[100 + r]++;
+														clientes[r].contas[100 + r].saldo = clientes[r].contas[100 + r].saldo - ValorTransferencia;																																				
+														clientes[100 + r].transacoes[NumTransacoes[100 + r]].tipo = 'D';																												
+														clientes[100 + r].transacoes[NumTransacoes[100 + r]].valor = ValorTransferencia;																						
+														strftime(clientes[100 + r].transacoes[NumTransacoes[100 + r]].data, 10, "%d/%m/%y", timeinfo);
+														strcpy(clientes[100 + r].transacoes[NumTransacoes[100 + r]].descricao, "Transferência para ");
+														strcat(clientes[100 + r].transacoes[NumTransacoes[100 + r]].descricao, clientes[s].nome);
+														strcat(clientes[100 + s].transacoes[NumTransacoes[100 + s]].descricao, clientes[r].nome);
+													}
+												}
 												system("cls");
 												printf("Transferência efetuada com sucesso.\n");
 												system("pause");
 												system("cls");
 												goto MenuContas;											
-											}
-										}
+											} 
+											system("cls");
+											printf("Saldo insuficiente.\n");
+											system("pause");
+											system("cls");
+											goto MenuContas;											
+									 }
 									}	
 								}
 								system("cls");
@@ -1227,10 +1232,10 @@ int main(void) {
 												printf("Não há transações registradas nessa conta.\n");																								
 											}else{																						
 												for(u = NumTransacoes[t]; u >= 1; u--){
-													printf("Data: %s\n", clientes[u].transacoes[u].data);
-													printf("Tipo: %c\n", clientes[u].transacoes[u].tipo);
-													printf("Valor: %.2f\n", clientes[u].transacoes[u].valor);
-													printf("Descrição: %s\n\n", clientes[u].transacoes[u].descricao);												
+													printf("Data: %s\n", clientes[t].transacoes[u].data);
+													printf("Tipo: %c\n", clientes[t].transacoes[u].tipo);
+													printf("Valor: %.2f\n", clientes[t].transacoes[u].valor);
+													printf("Descrição: %s\n\n", clientes[t].transacoes[u].descricao);												
 												}	
 											}
 											system("pause");
@@ -1256,10 +1261,10 @@ int main(void) {
 													printf("Não há transações registradas nessa conta.\n");																								
 												}else{																						
 													for(u = NumTransacoes[100 + t]; u >= 1; u--){
-														printf("Data: %s\n", clientes[u].transacoes[u].data);
-														printf("Tipo: %c\n", clientes[u].transacoes[u].tipo);
-														printf("Valor: %.2f\n", clientes[u].transacoes[u].valor);
-														printf("Descrição: %s\n\n", clientes[u].transacoes[u].descricao);												
+														printf("Data: %s\n", clientes[100 + t].transacoes[u].data);
+														printf("Tipo: %c\n", clientes[100 + t].transacoes[u].tipo);
+														printf("Valor: %.2f\n", clientes[100 + t].transacoes[u].valor);
+														printf("Descrição: %s\n\n", clientes[100 + t].transacoes[u].descricao);												
 													}	
 												}
 												system("pause");
