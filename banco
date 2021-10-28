@@ -146,7 +146,9 @@ int main(void) {
 	timeinfo = localtime(&rawtime);
 		
 	//PONTEIROS
-	FILE *arquivo;
+	FILE *ArquivoClientes;
+	FILE *ArquivoContas;
+	FILE *ArquivoTransacoes;
 		
 	//MENU PRINCIPAL
 	MenuPrincipal:
@@ -186,18 +188,18 @@ int main(void) {
 							case 'C':
 							case 'c':					
 								system("cls");									
-								AdcionarClientes();
-								if(ContClientes == 0){
-									arquivo = fopen("Clientes.txt", "w");
-								} else {								
-									arquivo = fopen("Clientes.txt", "a");
-									}								
-								fprintf(arquivo, 
-								"Código: %d;\nNome: %s;\nCPF: %d;\nCNPJ: %d;\nTelefone: %d;\nEndereço: %s;\n\n", 
-								clientes[ContClientes].codigo, clientes[ContClientes].nome,
-								clientes[ContClientes].CPF,	clientes[ContClientes].CNPJ,
-								clientes[ContClientes].telefone, clientes[ContClientes].endereco);
-								fclose(arquivo);								
+								AdcionarClientes();								
+								ArquivoClientes = fopen("Clientes.txt", "a");																
+								fprintf(ArquivoClientes, "Código: %d\n", clientes[ContClientes].codigo);
+								fprintf(ArquivoClientes, "Nome: %s\n", clientes[ContClientes].nome);
+								if(clientes[ContClientes].CNPJ == 0){								
+									fprintf(ArquivoClientes, "CPF: %d\n", clientes[ContClientes].CPF);
+								}else{
+									fprintf(ArquivoClientes, "CNPJ: %d\n", clientes[ContClientes].CNPJ);
+								}								
+								fprintf(ArquivoClientes, "Telefone: %d\n", clientes[ContClientes].telefone);
+								fprintf(ArquivoClientes, "Endereço: %s\n\n", clientes[ContClientes].endereco);								 																								
+								fclose(ArquivoClientes);								
 								system("cls");
 								printf("Dados salvos com sucesso.\n");
 								system("pause");
@@ -217,20 +219,20 @@ int main(void) {
 								else{																
 									int i = 1;									
 									for(i = 1; i <= ContClientes; i++){																													
-											printf("Código: %d\n", clientes[i].codigo);
-											printf("Nome: %s\n", clientes[i].nome);
-											if(clientes[i].CNPJ == 0){
-												printf("CPF: %d\n", clientes[i].CPF);
-											} else{
-												printf("CNPJ: %d\n", clientes[i].CNPJ);
+										printf("Código: %d\n", clientes[i].codigo);
+										printf("Nome: %s\n", clientes[i].nome);
+										if(clientes[i].CNPJ == 0){
+											printf("CPF: %d\n", clientes[i].CPF);
+										} else{
+											printf("CNPJ: %d\n", clientes[i].CNPJ);
 											}																			
-											printf("Telefone: %d\n", clientes[i].telefone);
-											printf("Endereço: %s\n", clientes[i].endereco);	
-											printf("\n");											
+										printf("Telefone: %d\n", clientes[i].telefone);
+										printf("Endereço: %s\n", clientes[i].endereco);	
+										printf("\n");											
 									}																								
-								system("pause"); 
-								system("cls");
-								goto MenuClientes;								
+									system("pause"); 
+									system("cls");
+									goto MenuClientes;								
 								}															
 							break;
 		
@@ -256,8 +258,8 @@ int main(void) {
 										printf("Digite o código do cliente procurado: ");
 										fflush(stdin);
 										scanf("%d", &codbusca);
-										if(codbusca == clientes[j].codigo && codbusca != 0){		
-											for(j = 1; j <= ContClientes; j++){											
+										for(j = 1; j <= ContClientes; j++){	
+											if(codbusca == clientes[j].codigo && codbusca != 0){																																													
 												printf("Código: %d\n", clientes[j].codigo);
 												printf("Nome: %s\n", clientes[j].nome);
 												if(clientes[j].CNPJ == 0){
@@ -268,17 +270,17 @@ int main(void) {
 												printf("Telefone: %d\n", clientes[j].telefone);
 												printf("Endereço: %s\n", clientes[j].endereco);	
 												printf("\n");
-											}
-											system("pause");
-											system("cls");
-											goto MenuClientes;	
-										} else {
-												system("cls");
-												printf("Cliente não encontrado.\n");
 												system("pause");
 												system("cls");
-												goto BuscaClientes;												
-											}																			
+												goto MenuClientes;
+											}												
+										} 
+										system("cls");
+										printf("Cliente não encontrado.\n");
+										system("pause");
+										system("cls");
+										goto MenuClientes;												
+																														
 									break;
 									
 									case 'N':
@@ -286,68 +288,68 @@ int main(void) {
 										printf("Digite o Nome do cliente procurado: ");
 										fflush(stdin);
 										scanf("%[^\n]s", codbusca2);
-										if(strncmp(codbusca2, clientes[j].nome, 50) == 0){
-											for(j = 1; j <= ContClientes; j++){											
+										for(j = 1; j <= ContClientes; j++){
+											if(strncmp(codbusca2, clientes[j].nome, 50) == 0){																																												
 												printf("Código: %d\n", clientes[j].codigo);
-											printf("Nome: %s\n", clientes[j].nome);
-											if(clientes[j].CNPJ == 0){
-												printf("CPF: %d\n", clientes[j].CPF);
-											} else{
-												printf("CNPJ: %d\n", clientes[j].CNPJ);
-											}																			
-											printf("Telefone: %d\n", clientes[j].telefone);
-											printf("Endereço: %s\n", clientes[j].endereco);	
-											printf("\n");
-											} 
-											system("pause");
-											system("cls");
-											goto MenuClientes;
-										} else {
-												system("cls");
-												printf("Cliente não encontrado.\n");
+												printf("Nome: %s\n", clientes[j].nome);
+												if(clientes[j].CNPJ == 0){
+													printf("CPF: %d\n", clientes[j].CPF);
+												} else{
+													printf("CNPJ: %d\n", clientes[j].CNPJ);
+												}																			
+												printf("Telefone: %d\n", clientes[j].telefone);
+												printf("Endereço: %s\n", clientes[j].endereco);	
+												printf("\n");
 												system("pause");
 												system("cls");
-												goto BuscaClientes;												
-											}																			
+												goto MenuClientes;
+											} 											
+										} 
+											system("cls");
+											printf("Cliente não encontrado.\n");
+											system("pause");
+											system("cls");
+											goto MenuClientes;												
+																														
 									break;
 																											
 									case 'F':
 									case 'f':
 										printf("Digite o CPF do cliente procurado: ");
 										fflush(stdin);
-										scanf("%d", &codbusca);
-										if(codbusca == clientes[j].CPF && codbusca != 0){	
-											for(j = 1; j <= ContClientes; j++){											
+										scanf("%d", &codbusca);											
+										for(j = 1; j <= ContClientes; j++){	
+											if(codbusca == clientes[j].CPF && codbusca != 0){																																	
 												printf("Código: %d\n", clientes[j].codigo);
-											printf("Nome: %s\n", clientes[j].nome);
-											if(clientes[j].CNPJ == 0){
-												printf("CPF: %d\n", clientes[j].CPF);
-											} else{
-												printf("CNPJ: %d\n", clientes[j].CNPJ);
-											}																			
-											printf("Telefone: %d\n", clientes[j].telefone);
-											printf("Endereço: %s\n", clientes[j].endereco);	
-											printf("\n");
-											} 
-											system("pause");
-											system("cls");
-											goto MenuClientes;
-										} else {
-												system("cls");
-												printf("Cliente não encontrado.\n");
+												printf("Nome: %s\n", clientes[j].nome);
+												if(clientes[j].CNPJ == 0){
+													printf("CPF: %d\n", clientes[j].CPF);
+												} else{
+													printf("CNPJ: %d\n", clientes[j].CNPJ);
+												}																			
+												printf("Telefone: %d\n", clientes[j].telefone);
+												printf("Endereço: %s\n", clientes[j].endereco);	
+												printf("\n");
 												system("pause");
 												system("cls");
-												goto BuscaClientes;												
-											}																			
+												goto MenuClientes;
+											} 											
+										} 
+										system("cls");
+										printf("Cliente não encontrado.\n");
+										system("pause");
+										system("cls");
+										goto MenuClientes;												
+																														
 									break;
 									
 									case 'J':
 									case 'j':
 										printf("Digite o CNPJ do cliente procurado: ");
 										fflush(stdin);
-										scanf("%d", &codbusca);
-										if(codbusca == clientes[j].CNPJ && codbusca != 0){	
-											for(j = 1; j <= ContClientes; j++){										
+										scanf("%d", &codbusca);											
+										for(j = 1; j <= ContClientes; j++){	
+											if(codbusca == clientes[j].CNPJ && codbusca != 0){																																	
 												printf("Código: %d\n", clientes[j].codigo);
 											printf("Nome: %s\n", clientes[j].nome);
 											if(clientes[j].CNPJ == 0){
@@ -358,17 +360,16 @@ int main(void) {
 											printf("Telefone: %d\n", clientes[j].telefone);
 											printf("Endereço: %s\n", clientes[j].endereco);	
 											printf("\n");
-											} 
 											system("pause");
 											system("cls");
 											goto MenuClientes;
-										} else {
-												system("cls");
-												printf("Cliente não encontrado.\n");
-												system("pause");
-												system("cls");
-												goto BuscaClientes;												
-											}																			
+											} 											
+										} 
+										system("cls");
+										printf("Cliente não encontrado.\n");
+										system("pause");
+										system("cls");
+										goto MenuClientes;																																										
 									break;	
 																									
 									default:								
@@ -390,10 +391,10 @@ int main(void) {
 								int k = 1;								
 								fflush(stdin);
 								scanf("%d", &codbusca3);
-								if(codbusca3 == clientes[k].codigo && codbusca3 != 0 ||
-								codbusca3 == clientes[k].CPF && codbusca3 != 0 ||
-								codbusca3 == clientes[k].CPF && codbusca3 != 0){		
-									for(k = 1; k <= ContClientes; k++){											
+								for(k = 1; k <= ContClientes; k++){	
+									if((codbusca3 == clientes[k].codigo && codbusca3 != 0) ||
+									(codbusca3 == clientes[k].CPF && codbusca3 != 0) ||
+									(codbusca3 == clientes[k].CNPJ && codbusca3 != 0)){																						
 										system("cls");
 										int novocodigo;
 										printf("Digite o novo código: ");
@@ -428,20 +429,19 @@ int main(void) {
 										fflush(stdin);
 										scanf("%[^\n]s", novoEND);
 										strcpy(clientes[k].endereco, novoEND);
-										break;																									
-									}											
-									system("cls");
-									printf("Dados do cliente atualizados com sucesso.\n");
-									system("pause");
-									system("cls");
-									goto MenuClientes;	
-								} else {
-									system("cls");
-									printf("Cliente não encontrado.\n");
-									system("pause");
-									system("cls");
-									goto AtualizarCliente;												
-									}																															
+										system("cls");
+										printf("Dados do cliente atualizados com sucesso.\n");
+										system("pause");
+										system("cls");
+										goto MenuClientes;																									
+									}																					
+								} 
+								system("cls");
+								printf("Cliente não encontrado.\n");
+								system("pause");
+								system("cls");
+								goto MenuClientes;												
+																																							
 							break;
 				
 							//EXCLUIR CLIENTE
@@ -449,16 +449,16 @@ int main(void) {
 							case 'e':	
 								ExcluirClientes:
 								system("cls");								
-								printf("Digite o código o CPF ou o CNPJ do cliente: ");																								
+								printf("Digite o código ou o CPF/CNPJ do cliente: ");																								
 								int codbusca5;								
-								int l = 1;																																															
-								system("cls");
-								printf("Digite o código do cliente procurado: ");
+								int l = 1;																																																							
 								fflush(stdin);
 								scanf("%d", &codbusca5);
-								if(codbusca5 == clientes[l].codigo && codbusca5 != 0){		
-									for(l = 1; l <= ContClientes; l++){											
-										printf("\n");
+								for(l = 1; l <= ContClientes; l++){	
+									if((codbusca5 == clientes[l].codigo && codbusca5 != 0) ||
+									(codbusca5 == clientes[l].CPF && codbusca5 != 0) ||
+									(codbusca5 == clientes[l].CNPJ && codbusca5 != 0)){																					
+										system("cls");
 										printf("Código: %d\n", clientes[l].codigo);
 										printf("Nome: %s\n", clientes[l].nome);
 										if(clientes[l].CNPJ == 0){
@@ -509,13 +509,12 @@ int main(void) {
 												goto ExcluirClientes2;														
 										}												
 									}												
-								} else {
-									system("cls");
-									printf("Cliente não encontrado.\n");
-									system("pause");
-									system("cls");
-									goto ExcluirClientes;												
-									}						
+								} 
+								system("cls");
+								printf("Cliente não encontrado.\n");
+								system("pause");
+								system("cls");
+								goto MenuClientes;																										
 							break;
 						
 							//SAIR
@@ -548,9 +547,7 @@ int main(void) {
 			printf("D - Realizar um depósito em uma conta.\n");
 			printf("T - Realizar transferência entre contas.\n");
 			printf("E - Exibir extrato de uma conta.\n");
-			printf("S - Sair\n");	
-			printf("%d\n", NumTransacoes[1]);
-			printf("%d\n", NumTransacoes[2]);		
+			printf("S - Sair\n");						
 															
 						char comando3;
 						fflush(stdin);
@@ -565,7 +562,8 @@ int main(void) {
 								int CodConta;
 								fflush(stdin);
 								scanf("%d", &CodConta);	
-								int m = 1;									
+								int m = 1;
+								int v = 1;									
 								for(m = 1; m <= ContClientes; m++){
 									if(CodConta == clientes[m].codigo || CodConta == clientes[m].CPF
 									|| CodConta == clientes[m].CNPJ){																				
@@ -579,7 +577,15 @@ int main(void) {
 												printf("Digite o número da conta: ");
 												fflush(stdin);
 												scanf("%d", &clientes[m].contas[m].NumConta);			
-												clientes[m].contas[m].saldo = 0;			
+												clientes[m].contas[m].saldo = 0;
+												ArquivoContas = fopen("Contas.txt", "a");
+												fprintf(ArquivoContas, "Conta %d\n", ContContas);
+												fprintf(ArquivoContas, "Cliente: %s\n", clientes[m].nome);
+												fprintf(ArquivoContas, "Código: %d\n", clientes[m].codigo);										
+												fprintf(ArquivoContas, "Agência: %d\n", clientes[m].contas[m].agencia);
+												fprintf(ArquivoContas, "Número: %d\n", clientes[m].contas[m].NumConta);
+												fprintf(ArquivoContas, "Saldo: %d\n\n", clientes[m].contas[m].saldo);
+												fclose(ArquivoContas);			
 											break;
 				
 											case 2:
@@ -589,16 +595,24 @@ int main(void) {
 												printf("Digite o número da conta: ");
 												fflush(stdin);
 												scanf("%d", &clientes[m].contas[m + 100].NumConta);			
-												clientes[m].contas[m + 100].saldo = 0;					
+												clientes[m].contas[m + 100].saldo = 0;	
+												ArquivoContas = fopen("Contas.txt", "a");
+												fprintf(ArquivoContas, "Conta %d\n", ContContas);
+												fprintf(ArquivoContas, "Cliente: %s\n", clientes[m].nome);
+												fprintf(ArquivoContas, "Código: %d\n", clientes[m].codigo);										
+												fprintf(ArquivoContas, "Agência: %d\n", clientes[m].contas[100 + m].agencia);
+												fprintf(ArquivoContas, "Número: %d\n", clientes[m].contas[100 + m].NumConta);
+												fprintf(ArquivoContas, "Saldo: %d\n\n", clientes[m].contas[100 + m].saldo);	
+												fclose(ArquivoContas);			
 											break;
-										}
+										}										
 										system("cls");
 										printf("Conta cadastrada com sucesso.\n");
 										system("pause");
 										system("cls");
 										goto MenuContas;																			
 									} 
-								}								
+								}																
 								system("cls");						
 								printf("Cliente não encontrado.\n");
 								system("pause");
@@ -742,6 +756,15 @@ int main(void) {
 													clientes[p].transacoes[NumTransacoes[p]].tipo = 'D';
 													strftime(clientes[p].transacoes[NumTransacoes[p]].data, 10, "%d/%m/%y", timeinfo);
 													clientes[p].transacoes[NumTransacoes[p]].valor = 50;																																							
+													ArquivoTransacoes = fopen("Transacoes.txt", "a");
+													fprintf(ArquivoTransacoes, "Saque\n");
+													fprintf(ArquivoTransacoes, "Agência: %d\n", clientes[p].contas[p].agencia);
+													fprintf(ArquivoTransacoes, "Número: %d\n", clientes[p].contas[p].NumConta);
+													fprintf(ArquivoTransacoes, "Data: %s\n", clientes[p].transacoes[NumTransacoes[p]].data);
+													fprintf(ArquivoTransacoes, "Tipo: %c\n", clientes[p].transacoes[NumTransacoes[p]].tipo);													
+													fprintf(ArquivoTransacoes, "Valor: %.2f\n", clientes[p].transacoes[NumTransacoes[p]].valor);
+													fprintf(ArquivoTransacoes, "Descrição: %s\n\n", clientes[p].transacoes[NumTransacoes[p]].descricao);
+													fclose(ArquivoTransacoes);
 													PrintNotas50();
 													system("pause");
 													system("cls");
@@ -766,6 +789,15 @@ int main(void) {
 													clientes[p].transacoes[NumTransacoes[p]].tipo = 'D';
 													strftime(clientes[p].transacoes[NumTransacoes[p]].data, 10, "%d/%m/%y", timeinfo);
 													clientes[p].transacoes[NumTransacoes[p]].valor = 100;										
+													ArquivoTransacoes = fopen("Transacoes.txt", "a");
+													fprintf(ArquivoTransacoes, "Saque\n");
+													fprintf(ArquivoTransacoes, "Agência: %d\n", clientes[p].contas[p].agencia);
+													fprintf(ArquivoTransacoes, "Número: %d\n", clientes[p].contas[p].NumConta);
+													fprintf(ArquivoTransacoes, "Data: %s\n", clientes[p].transacoes[NumTransacoes[p]].data);
+													fprintf(ArquivoTransacoes, "Tipo: %c\n", clientes[p].transacoes[NumTransacoes[p]].tipo);													
+													fprintf(ArquivoTransacoes, "Valor: %.2f\n", clientes[p].transacoes[NumTransacoes[p]].valor);
+													fprintf(ArquivoTransacoes, "Descrição: %s\n\n", clientes[p].transacoes[NumTransacoes[p]].descricao);
+													fclose(ArquivoTransacoes);
 													PrintNotas100();
 													system("pause");
 													system("cls");
@@ -790,6 +822,15 @@ int main(void) {
 													clientes[p].transacoes[NumTransacoes[p]].tipo = 'D';
 													strftime(clientes[p].transacoes[NumTransacoes[p]].data, 10, "%d/%m/%y", timeinfo);
 													clientes[p].transacoes[NumTransacoes[p]].valor = 200;													
+													ArquivoTransacoes = fopen("Transacoes.txt", "a");
+													fprintf(ArquivoTransacoes, "Saque\n");
+													fprintf(ArquivoTransacoes, "Agência: %d\n", clientes[p].contas[p].agencia);
+													fprintf(ArquivoTransacoes, "Número: %d\n", clientes[p].contas[p].NumConta);
+													fprintf(ArquivoTransacoes, "Data: %s\n", clientes[p].transacoes[NumTransacoes[p]].data);
+													fprintf(ArquivoTransacoes, "Tipo: %c\n", clientes[p].transacoes[NumTransacoes[p]].tipo);													
+													fprintf(ArquivoTransacoes, "Valor: %.2f\n", clientes[p].transacoes[NumTransacoes[p]].valor);
+													fprintf(ArquivoTransacoes, "Descrição: %s\n\n", clientes[p].transacoes[NumTransacoes[p]].descricao);
+													fclose(ArquivoTransacoes);
 													PrintNotas200();
 													system("pause");
 													system("cls");
@@ -814,6 +855,15 @@ int main(void) {
 													clientes[p].transacoes[NumTransacoes[p]].tipo = 'D';
 													strftime(clientes[p].transacoes[NumTransacoes[p]].data, 10, "%d/%m/%y", timeinfo);
 													clientes[p].transacoes[NumTransacoes[p]].valor = 500;													
+													ArquivoTransacoes = fopen("Transacoes.txt", "a");
+													fprintf(ArquivoTransacoes, "Saque\n");
+													fprintf(ArquivoTransacoes, "Agência: %d\n", clientes[p].contas[p].agencia);
+													fprintf(ArquivoTransacoes, "Número: %d\n", clientes[p].contas[p].NumConta);
+													fprintf(ArquivoTransacoes, "Data: %s\n", clientes[p].transacoes[NumTransacoes[p]].data);
+													fprintf(ArquivoTransacoes, "Tipo: %c\n", clientes[p].transacoes[NumTransacoes[p]].tipo);													
+													fprintf(ArquivoTransacoes, "Valor: %.2f\n", clientes[p].transacoes[NumTransacoes[p]].valor);
+													fprintf(ArquivoTransacoes, "Descrição: %s\n\n", clientes[p].transacoes[NumTransacoes[p]].descricao);
+													fclose(ArquivoTransacoes);
 													PrintNotas500();
 													system("pause");
 													system("cls");
@@ -862,6 +912,15 @@ int main(void) {
 														clientes[100 + p].transacoes[NumTransacoes[100 + p]].tipo = 'D';
 														strftime(clientes[100 + p].transacoes[NumTransacoes[100 + p]].data, 10, "%d/%m/%y", timeinfo);
 														clientes[100 + p].transacoes[NumTransacoes[100 + p]].valor = 50;
+														ArquivoTransacoes = fopen("Transacoes.txt", "a");
+														fprintf(ArquivoTransacoes, "Saque\n");
+														fprintf(ArquivoTransacoes, "Agência: %d\n", clientes[p].contas[100 + p].agencia);
+														fprintf(ArquivoTransacoes, "Número: %d\n", clientes[p].contas[100 + p].NumConta);
+														fprintf(ArquivoTransacoes, "Data: %s\n", clientes[100 + p].transacoes[NumTransacoes[p]].data);
+														fprintf(ArquivoTransacoes, "Tipo: %c\n", clientes[100 + p].transacoes[NumTransacoes[p]].tipo);													
+														fprintf(ArquivoTransacoes, "Valor: %.2f\n", clientes[100 + p].transacoes[NumTransacoes[p]].valor);
+														fprintf(ArquivoTransacoes, "Descrição: %s\n\n", clientes[100 + p].transacoes[NumTransacoes[p]].descricao);
+														fclose(ArquivoTransacoes);
 														PrintNotas50();
 														system("pause");
 														system("cls");
@@ -886,6 +945,15 @@ int main(void) {
 														clientes[100 + p].transacoes[NumTransacoes[100 + p]].tipo = 'D';
 														strftime(clientes[100 + p].transacoes[NumTransacoes[100 + p]].data, 10, "%d/%m/%y", timeinfo);
 														clientes[100 + p].transacoes[NumTransacoes[100 + p]].valor = 100;
+														ArquivoTransacoes = fopen("Transacoes.txt", "a");
+														fprintf(ArquivoTransacoes, "Saque\n");
+														fprintf(ArquivoTransacoes, "Agência: %d\n", clientes[p].contas[100 + p].agencia);
+														fprintf(ArquivoTransacoes, "Número: %d\n", clientes[p].contas[100 + p].NumConta);
+														fprintf(ArquivoTransacoes, "Data: %s\n", clientes[100 + p].transacoes[NumTransacoes[p]].data);
+														fprintf(ArquivoTransacoes, "Tipo: %c\n", clientes[100 + p].transacoes[NumTransacoes[p]].tipo);													
+														fprintf(ArquivoTransacoes, "Valor: %.2f\n", clientes[100 + p].transacoes[NumTransacoes[p]].valor);
+														fprintf(ArquivoTransacoes, "Descrição: %s\n\n", clientes[100 + p].transacoes[NumTransacoes[p]].descricao);
+														fclose(ArquivoTransacoes);
 														PrintNotas100();
 														system("pause");
 														system("cls");
@@ -910,6 +978,15 @@ int main(void) {
 														clientes[100 + p].transacoes[NumTransacoes[100 + p]].tipo = 'D';
 														strftime(clientes[100 + p].transacoes[NumTransacoes[100 + p]].data, 10, "%d/%m/%y", timeinfo);
 														clientes[100 + p].transacoes[NumTransacoes[100 + p]].valor = 200;
+														ArquivoTransacoes = fopen("Transacoes.txt", "a");
+														fprintf(ArquivoTransacoes, "Saque\n");
+														fprintf(ArquivoTransacoes, "Agência: %d\n", clientes[p].contas[100 + p].agencia);
+														fprintf(ArquivoTransacoes, "Número: %d\n", clientes[p].contas[100 + p].NumConta);
+														fprintf(ArquivoTransacoes, "Data: %s\n", clientes[100 + p].transacoes[NumTransacoes[p]].data);
+														fprintf(ArquivoTransacoes, "Tipo: %c\n", clientes[100 + p].transacoes[NumTransacoes[p]].tipo);													
+														fprintf(ArquivoTransacoes, "Valor: %.2f\n", clientes[100 + p].transacoes[NumTransacoes[p]].valor);
+														fprintf(ArquivoTransacoes, "Descrição: %s\n\n", clientes[100 + p].transacoes[NumTransacoes[p]].descricao);
+														fclose(ArquivoTransacoes);
 														PrintNotas200();
 														system("pause");
 														system("cls");
@@ -934,6 +1011,15 @@ int main(void) {
 														clientes[100 + p].transacoes[NumTransacoes[100 + p]].tipo = 'D';
 														strftime(clientes[100 + p].transacoes[NumTransacoes[100 + p]].data, 10, "%d/%m/%y", timeinfo);
 														clientes[100 + p].transacoes[NumTransacoes[100 + p]].valor = 500;
+														ArquivoTransacoes = fopen("Transacoes.txt", "a");
+														fprintf(ArquivoTransacoes, "Saque\n");
+														fprintf(ArquivoTransacoes, "Agência: %d\n", clientes[p].contas[100 + p].agencia);
+														fprintf(ArquivoTransacoes, "Número: %d\n", clientes[p].contas[100 + p].NumConta);
+														fprintf(ArquivoTransacoes, "Data: %s\n", clientes[100 + p].transacoes[NumTransacoes[p]].data);
+														fprintf(ArquivoTransacoes, "Tipo: %c\n", clientes[100 + p].transacoes[NumTransacoes[p]].tipo);													
+														fprintf(ArquivoTransacoes, "Valor: %.2f\n", clientes[100 + p].transacoes[NumTransacoes[p]].valor);
+														fprintf(ArquivoTransacoes, "Descrição: %s\n\n", clientes[100 + p].transacoes[NumTransacoes[p]].descricao);
+														fclose(ArquivoTransacoes);
 														PrintNotas500();
 														system("pause");
 														system("cls");
@@ -996,6 +1082,15 @@ int main(void) {
 										clientes[q].transacoes[NumTransacoes[q]].tipo = 'C';
 										clientes[q].transacoes[NumTransacoes[q]].valor = ValorDeposito;										
 										strftime(clientes[q].transacoes[NumTransacoes[q]].data, 10, "%d/%m/%y", timeinfo);
+										ArquivoTransacoes = fopen("Transacoes.txt", "a");
+										fprintf(ArquivoTransacoes, "Depósito\n");
+										fprintf(ArquivoTransacoes, "Agência: %d\n", clientes[q].contas[q].agencia);
+										fprintf(ArquivoTransacoes, "Número: %d\n", clientes[q].contas[q].NumConta);
+										fprintf(ArquivoTransacoes, "Data: %s\n", clientes[q].transacoes[NumTransacoes[q]].data);
+										fprintf(ArquivoTransacoes, "Tipo: %c\n", clientes[q].transacoes[NumTransacoes[q]].tipo);													
+										fprintf(ArquivoTransacoes, "Valor: %.2f\n", clientes[q].transacoes[NumTransacoes[q]].valor);
+										fprintf(ArquivoTransacoes, "Descrição: %s\n\n", clientes[q].transacoes[NumTransacoes[q]].descricao);
+										fclose(ArquivoTransacoes);
 										system("cls");
 										printf("Depósito efetuado com sucesso.\n");
 										system("pause");
@@ -1020,6 +1115,15 @@ int main(void) {
 											clientes[100 + q].transacoes[NumTransacoes[100 + q]].tipo = 'C';
 											clientes[100 + q].transacoes[NumTransacoes[100 + q]].valor = ValorDeposito;										
 											strftime(clientes[100 + q].transacoes[NumTransacoes[100 + q]].data, 10, "%d/%m/%y", timeinfo);
+											ArquivoTransacoes = fopen("Transacoes.txt", "a");
+											fprintf(ArquivoTransacoes, "Depósito\n");
+											fprintf(ArquivoTransacoes, "Agência: %d\n", clientes[q].contas[100 + q].agencia);
+											fprintf(ArquivoTransacoes, "Número: %d\n", clientes[q].contas[100 + q].NumConta);
+											fprintf(ArquivoTransacoes, "Data: %s\n", clientes[100 + q].transacoes[NumTransacoes[100 + q]].data);
+											fprintf(ArquivoTransacoes, "Tipo: %c\n", clientes[100 + q].transacoes[NumTransacoes[100 + q]].tipo);													
+											fprintf(ArquivoTransacoes, "Valor: %.2f\n", clientes[100 + q].transacoes[NumTransacoes[100 + q]].valor);
+											fprintf(ArquivoTransacoes, "Descrição: %s\n\n", clientes[100 + q].transacoes[NumTransacoes[100 + q]].descricao);
+											fclose(ArquivoTransacoes);
 											system("cls");
 											printf("Depósito efetuado com sucesso.\n");
 											system("pause");
@@ -1111,7 +1215,11 @@ int main(void) {
 												strftime(clientes[r].transacoes[NumTransacoes[r]].data, 10, "%d/%m/%y", timeinfo);
 												strcpy(clientes[r].transacoes[NumTransacoes[r]].descricao, "Transferência para "); 												
 												strcat(clientes[r].transacoes[NumTransacoes[r]].descricao, clientes[s].nome);												 												
-												strcat(clientes[s].transacoes[NumTransacoes[s]].descricao, clientes[r].nome);																								
+												strcat(clientes[s].transacoes[NumTransacoes[s]].descricao, clientes[r].nome);
+												ArquivoTransacoes = fopen("Transacoes.txt", "a");
+												fprintf(ArquivoTransacoes, "Transação\n");
+												fprintf(ArquivoTransacoes, "Agência da conta de origem: %d\n", clientes[r].contas[r].agencia);
+												fprintf(ArquivoTransacoes, "Número da conta de origem: %d\n", clientes[r].contas[r].NumConta);																								
 											}else{
 												if(NumAgenciaOrigem == clientes[r].contas[100 + r].agencia
 												&& NumContaOrigem == clientes[r].contas[100 + r].NumConta){
@@ -1122,9 +1230,18 @@ int main(void) {
 													strftime(clientes[100 + r].transacoes[NumTransacoes[100 + r]].data, 10, "%d/%m/%y", timeinfo);
 													strcpy(clientes[100 + r].transacoes[NumTransacoes[100 + r]].descricao, "Transferência para "); 												
 													strcat(clientes[100 + r].transacoes[NumTransacoes[100 + r]].descricao, clientes[s].nome);													 												
-													strcat(clientes[s].transacoes[NumTransacoes[s]].descricao, clientes[r].nome);															
+													strcat(clientes[s].transacoes[NumTransacoes[s]].descricao, clientes[r].nome);
+													ArquivoTransacoes = fopen("Transacoes.txt", "a");
+													fprintf(ArquivoTransacoes, "Transação\n");
+													fprintf(ArquivoTransacoes, "Agência da conta de origem: %d\n", clientes[r].contas[100 + r].agencia);
+													fprintf(ArquivoTransacoes, "Número da conta de origem: %d\n", clientes[r].contas[100 + r].NumConta);															
 												}
 											}
+											fprintf(ArquivoTransacoes, "Agência da conta destino: %d\n", clientes[s].contas[s].agencia);
+											fprintf(ArquivoTransacoes, "Número da conta destino: %d\n", clientes[s].contas[s].NumConta);
+											fprintf(ArquivoTransacoes, "Data: %s\n", clientes[s].transacoes[NumTransacoes[s]].data);
+											fprintf(ArquivoTransacoes, "Valor: %.2f\n", clientes[s].transacoes[NumTransacoes[s]].valor);
+											fclose(ArquivoTransacoes);
 											system("cls");
 											printf("Transferência efetuada com sucesso.\n");
 											system("pause");
@@ -1166,6 +1283,10 @@ int main(void) {
 													strcpy(clientes[r].transacoes[NumTransacoes[r]].descricao, "Transferência para ");
 													strcat(clientes[r].transacoes[NumTransacoes[r]].descricao, clientes[s].nome);
 													strcat(clientes[100 + s].transacoes[NumTransacoes[100 + s]].descricao, clientes[r].nome);
+													ArquivoTransacoes = fopen("Transacoes.txt", "a");
+													fprintf(ArquivoTransacoes, "Transação\n");
+													fprintf(ArquivoTransacoes, "Agência da conta de origem: %d\n", clientes[r].contas[r].agencia);
+													fprintf(ArquivoTransacoes, "Número da conta de origem: %d\n", clientes[r].contas[r].NumConta);
 												}else{
 													if(NumAgenciaOrigem == clientes[r].contas[100 + r].agencia
 													&& NumContaOrigem == clientes[r].contas[100 + r].NumConta){															
@@ -1177,8 +1298,17 @@ int main(void) {
 														strcpy(clientes[100 + r].transacoes[NumTransacoes[100 + r]].descricao, "Transferência para ");
 														strcat(clientes[100 + r].transacoes[NumTransacoes[100 + r]].descricao, clientes[s].nome);
 														strcat(clientes[100 + s].transacoes[NumTransacoes[100 + s]].descricao, clientes[r].nome);
+														ArquivoTransacoes = fopen("Transacoes.txt", "a");
+														fprintf(ArquivoTransacoes, "Transação\n");
+														fprintf(ArquivoTransacoes, "Agência da conta de origem: %d\n", clientes[r].contas[100 + r].agencia);
+														fprintf(ArquivoTransacoes, "Número da conta de origem: %d\n", clientes[r].contas[100 + r].NumConta);
 													}
 												}
+												fprintf(ArquivoTransacoes, "Agência da conta destino: %d\n", clientes[s].contas[100 + s].agencia);
+												fprintf(ArquivoTransacoes, "Número da conta destino: %d\n", clientes[s].contas[100 + s].NumConta);
+												fprintf(ArquivoTransacoes, "Data: %s\n", clientes[100 + s].transacoes[NumTransacoes[100 + s]].data);
+												fprintf(ArquivoTransacoes, "Valor: %.2f\n", clientes[100 + s].transacoes[NumTransacoes[100 + s]].valor);
+												fclose(ArquivoTransacoes);
 												system("cls");
 												printf("Transferência efetuada com sucesso.\n");
 												system("pause");
