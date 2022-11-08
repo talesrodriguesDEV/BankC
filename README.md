@@ -1,1 +1,2 @@
-Esse foi o meu primeiro projeto, elaborado na época em que cursava Engenharia de Computação na UFG, cuja ideia era esboçar o software de um banco em linguagem C.
+This was my first ever development project.
+I built it when I was studying Computer Engineering at UFG and the goal was to build a bank system in C.
